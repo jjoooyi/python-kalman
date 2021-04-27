@@ -31,7 +31,7 @@ f.R = np.array([[measure_noise]])
 # state uncertainty, Q
 f.Q = np.array([[state_noise]])
 # control inputs
-controls = np.array(data_dict[2])
+controls = np.array(data_dict[3])
 # get true states
 # true_states = np.zeros(numsteps)
 # true_states[0] = init_state
