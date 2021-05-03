@@ -1,13 +1,16 @@
 from matplotlib import pyplot as plt
 import numpy as np
 
-data = []
-with open('sensor_log01.txt', 'r') as f:
-    lines = f.readlines()
-    for line in lines:
-        line = line.strip()
-        if line:
-            data.append(float(line.split("|")[3]))
+data_dict = {}
+for i in range(1, 6):
+    with open("sensor_log0{}.txt".format(i), "r") as f:
+        lines = f.readlines()
+        data_list = []
+        for line in lines:
+            line = line.strip()
+            if line:
+                data_list.append(float(line.split("|")[3]))
+        data_dict[i] = data_list
 
 
 def do_averaging_7(data):
@@ -30,15 +33,16 @@ def moving_average2(a, n=3):  # "n=3" indicates the default value
     return ret
 
 
-graph = data
+for key in data_dict:
+    graph = data_dict.get(key)
+    # avg = do_averaging_7(data)
+    # avg = moving_average1(data, n=7)
+    avg = moving_average2(graph[6:], n=7)
 
-# avg = do_averaging_7(data)
-# avg = moving_average1(data, n=7)
-avg = moving_average2(data[6:], n=7)
-
-fig, ax = plt.subplots()
-ax.plot(range(len(data)), data, "blue")
-ax.plot(range(3, 3+len(avg)), avg, color="red")
-ax.set_ylabel('Raw')
-plt.tight_layout()
-plt.show()
+    fig, ax = plt.subplots()
+    ax.plot(range(len(graph)), graph, "blue")
+    ax.plot(range(3, 3+len(avg)), avg, color="red")
+    ax.set_ylabel('magnitude')
+    plt.legend(('measured', 'filtered'))
+    plt.tight_layout()
+    plt.show()
