@@ -14,4 +14,5 @@ for i in range(1, 6):
 for i in range(1, 6):
     x = range(1, len(data_dict[i])+1)
     plt.plot(x, data_dict[i])
+plt.legend(('1st', '2nd', '3rd', '4th', '5th'))
 plt.show()
