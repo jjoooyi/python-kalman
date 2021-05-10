@@ -39,10 +39,14 @@ for key in data_dict:
     # avg = moving_average1(data, n=7)
     avg = moving_average2(graph[6:], n=7)
 
+    # with open("test{}.txt".format(key), "w") as f:
+    #     f.write(str(avg))
+
     fig, ax = plt.subplots()
     ax.plot(range(len(graph)), graph, "blue")
     ax.plot(range(3, 3+len(avg)), avg, color="red")
     ax.set_ylabel('magnitude')
     plt.legend(('measured', 'filtered'))
     plt.tight_layout()
-    plt.show()
+
+    # plt.show()
