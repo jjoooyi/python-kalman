@@ -34,7 +34,7 @@ f.R = np.array([[measure_noise]])
 f.Q = np.array([[state_noise]])
 
 # control inputs
-controls = np.array(data_dict[3])
+controls = np.array(data_dict[5][6:])
 # 측정값
 measurements = [(s + np.random.normal(0, measure_noise)) for s in data_dict[1]]
 
